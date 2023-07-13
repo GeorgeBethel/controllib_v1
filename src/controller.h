@@ -25,7 +25,7 @@ namespace controllers{
             void Setki(float &ki);
             void SetCtrlr_freq(int &freq);
             void SetPIDVariant(String &type);
-            void computeOuput(float &nput, float &setPoint);
+            void computeOutput(float &nput, float &setPoint);
             float getOutput() override;
             void setLimits(double &Upperlimt, double &LowerLimt);
 

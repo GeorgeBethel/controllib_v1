@@ -1,3 +1,13 @@
+/**********************************************************************************************
+ * Arduino control Library - Version 1.0.0
+ * by okoroafor george <georgebethel5@gmail.com>
+ *
+ * This Library is licensed under the MIT License
+ * 
+ * The library is for implements various controller including PID, MPC and LQR controller
+ **********************************************************************************************/
+
+
 #include<controller.h>
 #include<Arduino.h>
 
@@ -46,7 +56,7 @@ void controllers::PID::setLimits(double &Upperlim, double &Lowerlim){
 
 }
 
-void controllers::PID::computeOuput(float &input, float &setPoint){
+void controllers::PID::computeOutput(float &input, float &setPoint){
     
     end_time = millis();
     float ctrld_output = 0;
@@ -63,13 +73,12 @@ void controllers::PID::computeOuput(float &input, float &setPoint){
                 if(ctrld_output >= UpperLimt_) output = UpperLimt_; 
                 if(ctrld_output <= LowerLimt_) output = LowerLimt_;
                 else output = ctrld_output;
-                prev_error = error;
+           
             }
 
             else{
 
                 output = ctrld_output;
-                prev_error = error;
             
             }
         }
@@ -88,7 +97,6 @@ void controllers::PID::computeOuput(float &input, float &setPoint){
             else{
                 
                 output = ctrld_output;
-                prev_error = error;
                 
                 }
 
@@ -105,20 +113,21 @@ void controllers::PID::computeOuput(float &input, float &setPoint){
                 if(ctrld_output >= UpperLimt_) output = UpperLimt_;
                 if(ctrld_output <= LowerLimt_) output = LowerLimt_;
                 else output = ctrld_output;
-                prev_integral_sum = integral_sum;
-                prev_error = error;
+           
 
             }
 
             else{
 
                 output = ctrld_output;
-                prev_integral_sum = integral_sum;
-                prev_error = error;
+          
 
             }
         }
-
+        
+        prev_error = error;
+        prev_integral_sum = integral_sum;
+        output = ctrld_output;
         end_time = start_time;
 
     }
