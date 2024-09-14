@@ -67,7 +67,7 @@ void controllers::PID::computeOutput(float &input, float &setPoint){
 
         if(PIDVariant_ == "P"){
 
-            ctrld_output = kp_ * error + input;
+            ctrld_output = kp_ * error;
 
             if(hasLimt_){
                 if(ctrld_output >= UpperLimt_) output = UpperLimt_; 
@@ -85,7 +85,7 @@ void controllers::PID::computeOutput(float &input, float &setPoint){
 
         if(PIDVariant_ == "PD"){
 
-            ctrld_output = kp_ * error + kd_ * (error - prev_error)/dt + input;
+            ctrld_output = kp_ * error + kd_ * (error - prev_error)/dt;
 
             if(hasLimt_){
                 if(ctrld_output >= UpperLimt_) output = UpperLimt_;
@@ -106,7 +106,7 @@ void controllers::PID::computeOutput(float &input, float &setPoint){
         if(PIDVariant_ == "PID"){
 
             integral_sum = ki_ * dt * error; 
-            ctrld_output = kp_ * error + kd_ * (error - prev_error)/dt + ki_ * (prev_integral_sum + integral_sum) + input;
+            ctrld_output = kp_ * error + kd_ * (error - prev_error)/dt + ki_ * (prev_integral_sum + integral_sum);
 
             if(hasLimt_){
 
